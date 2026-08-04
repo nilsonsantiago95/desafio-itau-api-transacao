@@ -35,8 +35,8 @@ public class TransactionService {
         transactions.add(transaction);
     }
 
-    public void delete(Transaction transaction) {
-        transactions.remove(transaction);
+    public void delete() {
+        transactions.clear();
     }
 
 }

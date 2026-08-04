@@ -5,13 +5,8 @@ import com.nilsonSantiago.api_transacao.dtos.RequestTransactionDto;
 import com.nilsonSantiago.api_transacao.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.time.OffsetDateTime;
 
 @RestController
 @RequestMapping("/transacao")
@@ -31,6 +26,12 @@ public class TransactionController {
         }
 
         return ResponseEntity.created(UriComponentsBuilder.fromPath("/transacao").build().toUri()).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete() {
+        transactionService.delete();
+        return ResponseEntity.ok().build();
     }
 
 }

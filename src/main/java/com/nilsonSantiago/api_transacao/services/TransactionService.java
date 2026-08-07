@@ -3,6 +3,8 @@ package com.nilsonSantiago.api_transacao.services;
 import com.nilsonSantiago.api_transacao.domain.Transaction;
 import com.nilsonSantiago.api_transacao.dtos.RequestTransactionDto;
 import com.nilsonSantiago.api_transacao.mappers.TransactionMapper;
+import com.nilsonSantiago.api_transacao.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -12,7 +14,8 @@ import java.util.List;
 @Service
 public class TransactionService {
 
-    private final List<Transaction> transactions = new ArrayList<>();
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     public void insert(RequestTransactionDto requestTransactionDto) {
 
@@ -32,11 +35,11 @@ public class TransactionService {
             throw new IllegalArgumentException("O valor não deve ser negativo");
         }
 
-        transactions.add(transaction);
+        transactionRepository.getTransactions().add(transaction);
     }
 
     public void delete() {
-        transactions.clear();
+        transactionRepository.getTransactions().clear();
     }
 
 }

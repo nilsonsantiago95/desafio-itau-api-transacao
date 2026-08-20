@@ -4,9 +4,11 @@ import com.nilsonSantiago.api_transacao.domain.Transaction;
 import com.nilsonSantiago.api_transacao.dtos.RequestTransactionDto;
 import com.nilsonSantiago.api_transacao.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import tools.jackson.databind.annotation.JsonValueInstantiator;
 
 @RestController
 @RequestMapping("/transacao")
@@ -17,13 +19,8 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Transaction> insert(@RequestBody RequestTransactionDto requestTransactionDto) {
-        try {
-            transactionService.insert(requestTransactionDto);
-        } catch(IllegalArgumentException e) {
-            return ResponseEntity.unprocessableContent().build();
-        } catch(UnknownError e) {
-            return ResponseEntity.badRequest().build();
-        }
+
+        transactionService.insert(requestTransactionDto);
 
         return ResponseEntity.created(UriComponentsBuilder.fromPath("/transacao").build().toUri()).build();
     }

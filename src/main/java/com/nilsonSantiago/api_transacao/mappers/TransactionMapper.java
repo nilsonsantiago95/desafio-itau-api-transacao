@@ -13,8 +13,7 @@ public class TransactionMapper {
     }
 
     public Transaction toTransaction(RequestTransactionDto requestTransactionDto) {
-        Transaction transaction = new Transaction(requestTransactionDto.valor(), OffsetDateTime.parse(requestTransactionDto.dataHora()));
-        return transaction;
+        return new Transaction(requestTransactionDto.valor(), OffsetDateTime.parse(requestTransactionDto.dataHora()));
     }
 
 }
